@@ -1,21 +1,28 @@
-local config_path = vim.fn.expand("~/.config/.pycodestyle")
-
--- Function to check if a file exists
-local function file_exists(name)
-   local f = io.open(name, "r")
-   if f ~= nil then io.close(f) return true else return false end
-end
-
--- Function to create .pycodestyle file with specific content
-local function create_pycodestyle()
-    local content = "[pycodestyle]\nignore = E501,E302, E305\n"
-    local file = io.open(config_path, "w")
-    file:write(content)
-    file:close()
-end
-
--- Check if .pycodestyle file exists, if not, create it
-if not file_exists(config_path) then
-    create_pycodestyle()
-end
-
+local lspconfig = require('lspconfig')
+lspconfig.pylsp.setup({
+  on_attach = function(client, bufnr)
+    -- Customize diagnostic messages
+    vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+      vim.lsp.diagnostic.on_publish_diagnostics, {
+        -- Disable virtual text
+        virtual_text = false,
+        -- Show signs
+        signs = true,
+        -- Delay update diagnostics
+        update_in_insert = false,
+      }
+    )
+  end,
+  settings = {
+    pylsp = {
+      plugins = {
+        pycodestyle = {
+          enabled = true,
+          ignore = {"E501", "E302", "E305"},
+        },
+        pylint = { enabled = false },
+        pyflakes = { enabled = false },
+      },
+    },
+  },
+})
