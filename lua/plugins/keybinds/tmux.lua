@@ -38,28 +38,51 @@ function Make()
   create_tmux_pane(string.format("make clean && make && ./%s; exec $SHELL", executable))
 end
 
-local function run_latest_python()
+
+-- Function to run the latest Python file
+function RunPython()
   -- Function to get the latest modified Python file
   local function get_latest_python_file()
     local handle = io.popen("ls -t *.py | head -1")
+    if not handle then
+      print("Failed to get the latest Python file")
+      return nil
+    end
     local result = handle:read("*a")
     handle:close()
     return result:gsub("%s+", "")  -- remove any trailing whitespace/newline
   end
 
   local file = get_latest_python_file()
-  if file == "" then
+  if not file or file == "" then
     print("No Python files found in the current directory.")
     return
   end
 
-  -- Create a new tmux pane and run the latest Python file
-  create_tmux_pane(string.format("python3 %s; exec $SHELL", file))
+  -- Check if Anaconda is installed
+  local handle = io.popen("command -v conda")
+  local result = handle:read("*a")
+  handle:close()
+
+  local cmd
+  if result and result ~= "" then
+    -- Anaconda is installed, use conda base environment
+    cmd = string.format("source ~/miniconda3/bin/activate base && python3 %s; exec $SHELL", file)
+  else
+    -- Anaconda is not installed, run the Python file directly
+    cmd = string.format("python3 %s; exec $SHELL", file)
+  end
+
+  -- Create a new tmux pane and run the command
+  create_tmux_pane(cmd)
 end
+
+
 
 keymap.set('n', '<C-h>', function() require('tmux').move_left() end)
 keymap.set('n', '<C-j>', function() require('tmux').move_bottom() end)
 keymap.set('n', '<C-k>', function() require('tmux').move_top() end)
 keymap.set('n', '<C-l>', function() require('tmux').move_right() end)
 keymap.set('n', '<leader>m', '<cmd>lua Make()<CR>', { noremap = true, silent = true })
-keymap.set('n', '<leader>rp', '<cmd>lua run_latest_python()<CR>', { noremap = true, silent = true })
+keymap.set('n', '<leader>rp', '<cmd>lua RunPython()<CR>', { noremap = true, silent = true })
+
