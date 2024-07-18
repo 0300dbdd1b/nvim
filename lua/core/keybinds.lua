@@ -1,17 +1,4 @@
--- Function to open a simple vertical split
-function OpenWindowSplitVertical()
-  vim.cmd('vsplit')
-end
-
--- Function to open a simple horizontal split
-function OpenWindowSplitHorizontal()
-  vim.cmd('split')
-end
-
 local keymap = vim.keymap
--- Keybindings to call the functions
-keymap.set('n', '<leader>sv', ':lua OpenWindowSplitVertical()<CR>', { noremap = true, silent = true })
-keymap.set('n', '<leader>sh', ':lua OpenWindowSplitHorizontal()<CR>', { noremap = true, silent = true })
 
 -- Keybindings for resizing windows
 keymap.set('n', '<leader>r+', ':resize +4<CR>', { noremap = true, silent = true })

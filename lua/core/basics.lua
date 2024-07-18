@@ -7,6 +7,7 @@ vim.cmd[[set tabstop=4]]				-- number of colums occupied by a tab
 vim.cmd[[set wildmode=longest, list]]	-- get bash-like completions
 vim.cmd[[syntax on]]					-- syntax highlighting
 vim.cmd[[set autoindent]]				-- indent a new line the same amount as the line just typed
+vim.cmd[[set noexpandtab]]
 vim.cmd[[set shiftwidth=4]]				-- width for autoindent
 vim.cmd[[set tabstop=4]]				-- tabstop 
 vim.cmd[[set hlsearch]]					-- highlight search
