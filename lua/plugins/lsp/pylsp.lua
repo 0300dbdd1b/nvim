@@ -18,7 +18,7 @@ lspconfig.pylsp.setup({
       plugins = {
         pycodestyle = {
           enabled = true,
-          ignore = {"E501", "E302", "E305"},
+          ignore = {"E501", "E302", "E305", "W191", "E303", "E261", "W291", "W293", "W391"},
         },
         pylint = { enabled = false },
         pyflakes = { enabled = false },
