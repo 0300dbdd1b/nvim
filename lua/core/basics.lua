@@ -17,4 +17,3 @@ vim.cmd[[set clipboard+=unnamedplus]]	-- use system clipboard
 vim.cmd[[set undofile]]
 vim.cmd[[set undolevels=1000]]
 -- vim.cmd[[set undodir=Your/Data/Dir]]
-
