@@ -20,7 +20,7 @@ vim.cmd('autocmd! TermOpen term://*toggleterm#* lua vim.keymap.set("t", "<C-l>",
 vim.cmd('autocmd! TermOpen term://*toggleterm#* lua vim.keymap.set("t", "<C-w>", [[<C-\\><C-n><C-w>]], { buffer = 0 })')
 
 -- Keybindings for opening terminals in different layouts
-keymap.set('n', 'tv', ':ToggleTerm direction=vertical<CR>', opts)
-keymap.set('n', 'th', ':ToggleTerm direction=horizontal<CR>', opts)
-keymap.set('n', 'tf', ':ToggleTerm direction=float<CR>', opts)
+keymap.set('n', '<leader>tv', ':ToggleTerm direction=vertical<CR>', opts)
+keymap.set('n', '<leader>th', ':ToggleTerm direction=horizontal<CR>', opts)
+keymap.set('n', '<leader>tf', ':ToggleTerm direction=float<CR>', opts)
 
