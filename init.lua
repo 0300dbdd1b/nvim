@@ -13,12 +13,13 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 
+
 -- Function to load Lua files from a directory
 local function load_files_from_dir(dir, prefix)
   local files = vim.fn.readdir(dir)
   for _, file in ipairs(files) do
-    local module_name = file:match("(.+)%.lua$")
-    if module_name then
+    if not file:match("^%.") and file:match("%.lua$") then
+      local module_name = file:match("(.+)%.lua$")
       require(prefix .. module_name)
     end
   end
@@ -28,14 +29,15 @@ end
 local function collect_plugin_specs()
   local plugins = {}
   local base_path = vim.fn.stdpath("config") .. "/lua/"
-  local plugin_dirs = { "plugins"}
+  local plugin_dirs = { "plugins" }
 
   for _, plugin_dir in ipairs(plugin_dirs) do
     local dir_path = base_path .. plugin_dir
     local files = vim.fn.readdir(dir_path)
+
     for _, file in ipairs(files) do
-      local plugin_name = file:match("(.+)%.lua$")
-      if plugin_name then
+      if not file:match("^%.") and file:match("%.lua$") then
+        local plugin_name = file:match("(.+)%.lua$")
         table.insert(plugins, require(plugin_dir:gsub("/", ".") .. "." .. plugin_name))
       end
     end
@@ -63,5 +65,4 @@ end
 
 -- Load all configurations
 load_all()
-
 

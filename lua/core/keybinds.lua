@@ -1,10 +1,10 @@
 local keymap = vim.keymap
 
 -- Keybindings for resizing windows
-keymap.set('n', '<leader>r+', ':resize +4<CR>', { noremap = true, silent = true })
-keymap.set('n', '<leader>r-', ':resize -4<CR>', { noremap = true, silent = true })
-keymap.set('n', '<leader>r>', ':vertical resize +4<CR>', { noremap = true, silent = true })
-keymap.set('n', '<leader>r<', ':vertical resize -4<CR>', { noremap = true, silent = true })
+keymap.set('n', '<leader>+', ':resize +4<CR>', { noremap = true, silent = true })
+keymap.set('n', '<leader>-', ':resize -4<CR>', { noremap = true, silent = true })
+keymap.set('n', '<leader>>', ':vertical resize +4<CR>', { noremap = true, silent = true })
+keymap.set('n', '<leader><', ':vertical resize -4<CR>', { noremap = true, silent = true })
 
 -- Keybindings for moving between windows
 keymap.set('n', '<C-h>', '<C-w>h', { noremap = true, silent = true })
