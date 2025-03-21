@@ -19,4 +19,4 @@ vim.cmd[[set undolevels=1000]]
 vim.cmd[[set foldmethod=manual]]
 vim.cmd[[set foldlevel=99]]
 
--- vim.cmd[[set undodir=Your/Data/Dir]]
+vim.cmd[[set foldlevel=99]]
